@@ -107,26 +107,103 @@ console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prot
 
 console.log('\n--- Assignment 4 ---------------------------------------')
 
+Salad.parse = function(json) {
+
+const arr = JSON.parse(json);
+
+if (Array.isArray(arr)) {
+  const salads = [];
+  arr.forEach(salad => {
+    const newSalad = new Salad();
+    salad.ingredients.forEach(ingredient => {
+      newSalad.add(ingredient.name, inventory[ingredient.name]);
+    });
+    salads.push(newSalad);
+  });
+  return salads;
+}
+else {
+  const newSalad = new Salad();
+  arr.ingredients.forEach(ingredient => {
+    newSalad.add(ingredient.name, inventory[ingredient.name]);
+  });
+  return newSalad;
+  }
+}
 
 
-// const singleText = JSON.stringify(myCaesarSalad);
-// const arrayText = JSON.stringify([myCaesarSalad, myCaesarSalad]);
+const singleText = JSON.stringify(myCaesarSalad);
+const arrayText = JSON.stringify([myCaesarSalad, myCaesarSalad]);
 
 const objectCopy = new Salad(myCaesarSalad);
-//const singleCopy = Salad.parse(singleText);
-//const arrayCopy = Salad.parse(arrayText);
+const singleCopy = Salad.parse(singleText);
+const arrayCopy = Salad.parse(arrayText);
 
-console.log('original myCaesarSalad\n' + JSON.stringify(myCaesarSalad));
-// console.log('new(myCaesarSalad)\n' + JSON.stringify(objectCopy));
-// console.log('Salad.parse(singleText)\n' + JSON.stringify(singleCopy));
-// console.log('Salad.parse(arrayText)\n' + JSON.stringify(arrayCopy));
+console.log('original myCaesarSalad\n' + JSON.stringify(myCaesarSalad)+ '\n');
+console.log('new(myCaesarSalad)\n' + JSON.stringify(objectCopy)+ '\n');
+console.log('Salad.parse(singleText)\n' + JSON.stringify(singleCopy)+ '\n');
+console.log('Salad.parse(arrayText)\n' + JSON.stringify(arrayCopy)+ '\n');
 
-// singleCopy.add('Gurka', inventory['Gurka']);
-// console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
-// console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
+singleCopy.add('Gurka', inventory['Gurka']);
+console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
+console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
 
 console.log('\n--- Assignment 5 ---------------------------------------')
-/*
+
+// class GourmetSalad {
+//   constructor(salad) { 
+//     if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
+//       this.ingredients = salad.ingredients;
+//     } else {
+//       this.ingredients = [];
+//     }
+//   }
+//   add(name, properties, size=1) {
+//     if(this.ingredients.filter(ingredient => ingredient.name === name).length > 0) {
+//       this.ingredients.filter(ingredient => ingredient.name === name).reduce(ingredient => ingredient.size += size, 0);
+//     } else {
+//       this.ingredients.push({name, properties, size});
+//     }
+//     return this;
+//    }
+   
+//   remove(name) { 
+//     this.ingredients = this.ingredients.filter(ingredient => ingredient.name !== name);
+//     return this;
+//   }
+// }
+
+// GourmetSalad.prototype.getPrice = function() {
+//   return this.ingredients.reduce(ingredient => ingredient.properties.price * ingredient.size, 0);
+// }
+
+
+class GourmetSalad extends Salad{
+
+  constructor(ingredients) {
+    super(ingredients);
+  }
+
+  add(name, properties, size=1) {
+    if(this.ingredients.filter(ingredient => ingredient.name === name).length > 0) {
+      this.ingredients.filter(ingredient => ingredient.name === name).reduce(ingredient => ingredient.properties.size += size, 0);
+    } else {
+      properties = {...properties, size};
+      this.ingredients.push({name, properties});
+    }
+    return this;
+  }
+
+  getPrice() {
+    return this.ingredients.reduce((sum, ingredient) => sum + ingredient.properties.price * ingredient.properties.size, 0);
+  }
+
+
+}
+
+
+
+
 let myGourmetSalad = new GourmetSalad()
   .add('Sallad', inventory['Sallad'], 0.5)
   .add('Kycklingfilé', inventory['Kycklingfilé'], 2)
@@ -137,7 +214,7 @@ let myGourmetSalad = new GourmetSalad()
 console.log('Min gourmetsallad med lite bacon kostar ' + myGourmetSalad.getPrice() + ' kr');
 myGourmetSalad.add('Bacon', inventory['Bacon'], 1)
 console.log('Med extra bacon kostar den ' + myGourmetSalad.getPrice() + ' kr');
-*/
+
 console.log('\n--- Assignment 6 ---------------------------------------')
 /*
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
