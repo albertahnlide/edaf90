@@ -25,9 +25,12 @@ for (const name in inventory) {
 console.log('\n--- Assignment 1 ---------------------------------------')
 
 function makeOptions(inv, prop) {
-  
-  return 'TODO';
+  const names = Object.keys(inventory);
+  const options = names.map(name => `<option value="${name}" key="${name}">${name}, ${inventory[name].price} kr</option>`);
+
+  return options;
 }
+
 
 console.log(makeOptions(inventory, 'foundation'));
 
