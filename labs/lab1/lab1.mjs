@@ -37,8 +37,12 @@ console.log(makeOptions(inventory, 'protein'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
-  constructor() { 
-    this.ingredients = [];
+  constructor(salad) { 
+    if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
+      this.ingredients = salad.ingredients;
+    } else {
+      this.ingredients = [];
+    }
   }
   add(name, properties) {
     this.ingredients.push({name, properties});
@@ -61,6 +65,7 @@ let myCaesarSalad = new Salad()
 console.log(JSON.stringify(myCaesarSalad) + '\n');
 myCaesarSalad.remove('Gurka');
 console.log(JSON.stringify(myCaesarSalad) + '\n');
+
 
 console.log('\n--- Assignment 3 ---------------------------------------')
 
@@ -88,9 +93,12 @@ console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör
 console.log('\n--- reflection question 3 ---------------------------------------')
 console.log('typeof Salad: ' + typeof Salad);
 console.log('typeof Salad.prototype: ' + typeof Salad.prototype);
+// console.log('typeof Object.getPrototypeOf(Salad): ' + typeof Object.getPrototypeOf(Salad));
 console.log('typeof Salad.prototype.prototype: ' + typeof Salad.prototype.prototype);
 console.log('typeof myCaesarSalad: ' + typeof myCaesarSalad);
 console.log('typeof myCaesarSalad.prototype: ' + typeof myCaesarSalad.prototype);
+// console.log('Object.getPrototypeOf(Salad): '+Object.getPrototypeOf(Salad));
+// console.log('Salad.prototype: '+ Salad.prototype)
 console.log('check 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad)));
 console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSalad)));
 console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype)));
@@ -98,23 +106,25 @@ console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prot
 
 
 console.log('\n--- Assignment 4 ---------------------------------------')
-/*
-const singleText = JSON.stringify(myCaesarSalad);
-const arrayText = JSON.stringify([myCaesarSalad, myCaesarSalad]);
+
+
+
+// const singleText = JSON.stringify(myCaesarSalad);
+// const arrayText = JSON.stringify([myCaesarSalad, myCaesarSalad]);
 
 const objectCopy = new Salad(myCaesarSalad);
-const singleCopy = Salad.parse(singleText);
-const arrayCopy = Salad.parse(arrayText);
+//const singleCopy = Salad.parse(singleText);
+//const arrayCopy = Salad.parse(arrayText);
 
 console.log('original myCaesarSalad\n' + JSON.stringify(myCaesarSalad));
-console.log('new(myCaesarSalad)\n' + JSON.stringify(objectCopy));
-console.log('Salad.parse(singleText)\n' + JSON.stringify(singleCopy));
-console.log('Salad.parse(arrayText)\n' + JSON.stringify(arrayCopy));
+// console.log('new(myCaesarSalad)\n' + JSON.stringify(objectCopy));
+// console.log('Salad.parse(singleText)\n' + JSON.stringify(singleCopy));
+// console.log('Salad.parse(arrayText)\n' + JSON.stringify(arrayCopy));
 
-singleCopy.add('Gurka', inventory['Gurka']);
-console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
-console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
-*/
+// singleCopy.add('Gurka', inventory['Gurka']);
+// console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
+// console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
+
 console.log('\n--- Assignment 5 ---------------------------------------')
 /*
 let myGourmetSalad = new GourmetSalad()
