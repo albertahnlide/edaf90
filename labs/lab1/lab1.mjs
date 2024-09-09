@@ -5,6 +5,10 @@
  */
 
 import inventory from './inventory.mjs';
+import { v4 as uuidv4 } from 'uuid';
+
+
+
 console.log('\n=== beginning of printout ================================')
 console.log('inventory:', inventory);
 
@@ -40,6 +44,7 @@ console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
   static instanceCounter = 0;
   constructor(salad) { 
+    const uuid = uuidv4(); 
     this.id = 'salad_' + Salad.instanceCounter++;
     if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
       this.ingredients = salad.ingredients;
@@ -192,8 +197,6 @@ console.log('\n--- Assignment 6 ---------------------------------------')
 
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
 
-// console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
-
 
 /**
  * Reflection question 4
@@ -205,10 +208,10 @@ console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
  * Reflection question 5
  */
 
-// Detta visste jag inte men tydligen funkar detta lol
-Object.defineProperty(Salad.prototype, 'id', {
-  writable: false
-});
+// // Detta visste jag inte men tydligen funkar detta lol
+// Object.defineProperty(Salad.prototype, 'id', {
+//   writable: false
+// });
 
 
 /**
@@ -217,3 +220,13 @@ Object.defineProperty(Salad.prototype, 'id', {
 
 
 // Yes you can use # before a name. 
+
+
+console.log('\n--- Assignment 7 ---------------------------------------')
+Salad.prototype.uuid = uuidv4();
+
+console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
+
+
+
+// Tror och hoppas att detta är rätt
