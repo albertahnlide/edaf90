@@ -36,8 +36,11 @@ function makeOptions(inv, prop) {
 console.log(makeOptions(inventory, 'protein'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
+
 class Salad {
+  static instanceCounter = 0;
   constructor(salad) { 
+    this.id = 'salad_' + Salad.instanceCounter++;
     if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
       this.ingredients = salad.ingredients;
     } else {
@@ -150,33 +153,6 @@ console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
 
 console.log('\n--- Assignment 5 ---------------------------------------')
 
-// class GourmetSalad {
-//   constructor(salad) { 
-//     if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
-//       this.ingredients = salad.ingredients;
-//     } else {
-//       this.ingredients = [];
-//     }
-//   }
-//   add(name, properties, size=1) {
-//     if(this.ingredients.filter(ingredient => ingredient.name === name).length > 0) {
-//       this.ingredients.filter(ingredient => ingredient.name === name).reduce(ingredient => ingredient.size += size, 0);
-//     } else {
-//       this.ingredients.push({name, properties, size});
-//     }
-//     return this;
-//    }
-   
-//   remove(name) { 
-//     this.ingredients = this.ingredients.filter(ingredient => ingredient.name !== name);
-//     return this;
-//   }
-// }
-
-// GourmetSalad.prototype.getPrice = function() {
-//   return this.ingredients.reduce(ingredient => ingredient.properties.price * ingredient.size, 0);
-// }
-
 
 class GourmetSalad extends Salad{
 
@@ -185,23 +161,19 @@ class GourmetSalad extends Salad{
   }
 
   add(name, properties, size=1) {
-    if(this.ingredients.filter(ingredient => ingredient.name === name).length > 0) {
-      this.ingredients.filter(ingredient => ingredient.name === name).reduce(ingredient => ingredient.properties.size += size, 0);
+    let existingIngredient = this.ingredients.find(ingredient => ingredient.name === name);
+    if (existingIngredient) {
+      existingIngredient.properties.size += size;
     } else {
       properties = {...properties, size};
       this.ingredients.push({name, properties});
     }
     return this;
   }
-
   getPrice() {
     return this.ingredients.reduce((sum, ingredient) => sum + ingredient.properties.price * ingredient.properties.size, 0);
   }
-
-
 }
-
-
 
 
 let myGourmetSalad = new GourmetSalad()
@@ -216,17 +188,32 @@ myGourmetSalad.add('Bacon', inventory['Bacon'], 1)
 console.log('Med extra bacon kostar den ' + myGourmetSalad.getPrice() + ' kr');
 
 console.log('\n--- Assignment 6 ---------------------------------------')
-/*
+
+
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
-console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
-*/
+
+// console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
+
 
 /**
  * Reflection question 4
  */
+
+// Static properties are stored in the constructor function itself.
+
 /**
  * Reflection question 5
  */
+
+// Detta visste jag inte men tydligen funkar detta lol
+Object.defineProperty(Salad.prototype, 'id', {
+  writable: false
+});
+
+
 /**
  * Reflection question 6
  */
+
+
+// Yes you can use # before a name. 
