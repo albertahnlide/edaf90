@@ -25,6 +25,7 @@ for (const name in inventory) {
 console.log('\n--- Assignment 1 ---------------------------------------')
 
 function makeOptions(inv, prop) {
+  
   return 'TODO';
 }
 
