@@ -161,8 +161,13 @@ console.log('\n--- Assignment 5 ---------------------------------------')
 
 class GourmetSalad extends Salad{
 
-  constructor(ingredients) {
-    super(ingredients);
+  constructor(mySalad) {
+    super(mySalad);
+    if (mySalad instanceof Salad && Array.isArray(mySalad.ingredients)) {
+      this.ingredients = mySalad.ingredients;
+    } else {
+      this.ingredients = [];
+    }
   }
 
   add(name, properties, size=1) {
