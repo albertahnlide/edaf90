@@ -44,7 +44,7 @@ console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
   static instanceCounter = 0;
   constructor(salad) { 
-    const uuid = uuidv4(); 
+    this.uuid = uuidv4(); 
     this.id = 'salad_' + Salad.instanceCounter++;
     if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
       this.ingredients = salad.ingredients;
@@ -117,25 +117,25 @@ console.log('\n--- Assignment 4 ---------------------------------------')
 
 Salad.parse = function(json) {
 
-const arr = JSON.parse(json);
+  const arr = JSON.parse(json);
 
-if (Array.isArray(arr)) {
-  const salads = [];
-  arr.forEach(salad => {
+  if (Array.isArray(arr)) {
+    const salads = [];
+    arr.forEach(salad => {
+      const newSalad = new Salad();
+      salad.ingredients.forEach(ingredient => {
+        newSalad.add(ingredient.name, inventory[ingredient.name]);
+      });
+      salads.push(newSalad);
+    });
+    return salads;
+  }
+  else {
     const newSalad = new Salad();
-    salad.ingredients.forEach(ingredient => {
+    arr.ingredients.forEach(ingredient => {
       newSalad.add(ingredient.name, inventory[ingredient.name]);
     });
-    salads.push(newSalad);
-  });
-  return salads;
-}
-else {
-  const newSalad = new Salad();
-  arr.ingredients.forEach(ingredient => {
-    newSalad.add(ingredient.name, inventory[ingredient.name]);
-  });
-  return newSalad;
+    return newSalad;
   }
 }
 
@@ -228,10 +228,16 @@ console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
 
 
 console.log('\n--- Assignment 7 ---------------------------------------')
-Salad.prototype.uuid = uuidv4();
 
 console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
 
 
 
-// Tror och hoppas att detta är rätt
+const salad1 = new Salad();
+// add ingredients to salad 1
+const salad2 = new Salad(salad1)
+// salad1.uuid !== salad2.uuid, they are different salads
+salad2.add('Bacon', inventory['Bacon']);
+
+console.log('salad1.uuid:', salad1.uuid);
+console.log('salad2.uuid:', salad2.uuid);
