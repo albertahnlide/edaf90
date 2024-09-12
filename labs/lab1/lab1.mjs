@@ -42,10 +42,10 @@ console.log(makeOptions(inventory, 'protein'));
 console.log('\n--- Assignment 2 ---------------------------------------')
 
 class Salad {
-  static instanceCounter = 0;
+  static #instanceCounter = 0;
   constructor(salad) { 
     this.uuid = uuidv4(); 
-    this.id = 'salad_' + Salad.instanceCounter++;
+    this.id = 'salad_' + Salad.#instanceCounter++;
     if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
       this.ingredients = salad.ingredients;
     } else {
