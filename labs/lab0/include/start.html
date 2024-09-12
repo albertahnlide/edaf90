@@ -5,8 +5,49 @@
   <meta charset="UTF-8">
   <title>EDAF90</title>
 </head>
-
 <body>
+  <img src="https://www.w3schools.com/favicon.ico" alt="w3schools logo">
+  <br>
   <h1>My own form</h1>
 
-</html>
+  <form>
+    <fieldset>
+      <legend>
+        Choose size
+      </legend>
+      <label for="size">Size:</label>
+      <select name="size" id="size">
+        <option value="90g">90g</option>
+        <option value="120g">120g</option>
+        <option value="180g">180g</option>
+      </select>
+      
+      <!-- <span>
+        <input type="radio" class="radio" value="90g" name="size" checked> 
+        <label for="90g"> 90g</label>
+        <input type="radio"  class="radio" value="120g" name="size"> 
+        <label for="120g"> 120g</label>
+        <input type="radio"  class="radio" value="180g" name="size"> 
+        <label for="180g"> 180g</label>
+      </span> -->
+
+
+
+    </fieldset>
+
+    <fieldset>
+      <legend>
+        Add-ons
+      </legend>
+    <!-- <label for="add-ons">Add-ons:</label> -->
+      <input type="checkbox" name="add-ons" value="onion" checked>Onion
+      <input type="checkbox" name="add-ons" value="tomato" checked>Tomato
+      <input type="checkbox" name="add-ons" value="cucumber" checked>Cucumber
+    </fieldset>
+    <input type="submit" value="Place order">
+
+
+
+</form>
+
+</body>
