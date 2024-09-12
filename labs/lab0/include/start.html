@@ -8,9 +8,9 @@
 <body>
   <img src="https://www.w3schools.com/favicon.ico" alt="w3schools logo">
   <br>
-  <h1>My own form</h1>
+  <h1 tabindex="0">My own form</h1>
 
-  <form>
+  <form>  
     <fieldset>
       <legend>
         Choose size
@@ -21,7 +21,7 @@
         <option value="120g">120g</option>
         <option value="180g">180g</option>
       </select>
-      
+
       <!-- <span>
         <input type="radio" class="radio" value="90g" name="size" checked> 
         <label for="90g"> 90g</label>
@@ -40,13 +40,14 @@
         Add-ons
       </legend>
     <!-- <label for="add-ons">Add-ons:</label> -->
+     <span>
       <input type="checkbox" name="add-ons" value="onion" checked>Onion
       <input type="checkbox" name="add-ons" value="tomato" checked>Tomato
       <input type="checkbox" name="add-ons" value="cucumber" checked>Cucumber
+     </span>
     </fieldset>
-    <input type="submit" value="Place order">
-
-
+    
+      <input type="submit" value="Place order">
 
 </form>
 
