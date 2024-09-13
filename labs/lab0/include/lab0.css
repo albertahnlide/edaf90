@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    color: darkblue;
+}
+
+html {
+    background-color: cadetblue;
+    zoom: 150%;
+}
+
+fieldset {
+    border-radius: 10px;
+}
+
+.btn {
+    border-radius: 8px;
+    float: right;
+    font-size: 14px;
+    padding: 7px 14px;
+    margin-top: 5px;
+}
