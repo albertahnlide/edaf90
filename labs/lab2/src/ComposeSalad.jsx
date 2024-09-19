@@ -15,9 +15,10 @@ function ComposeSalad(props) {
         .filter(([name, properties]) => properties[prop])
         .map(([name, properties]) => (
           <option value={name} key={name}>
-            {name}, {properties.price} kr
+            {name}
           </option>
-        ));
+        )); 
+        // {name}, {properties.price} kr
 
       return options;
     }
