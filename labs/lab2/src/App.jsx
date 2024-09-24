@@ -1,12 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import inventory from './inventory.mjs';
 import ComposeSalad from './ComposeSalad';
-import Salad from './Salad';
 import { useState } from 'react';
 import ViewOrder from './ViewOrder';
 
 function App() {
-  let extras = Object.keys(inventory).filter(name => inventory[name].extra);
+  // let extras = Object.keys(inventory).filter(name => inventory[name].extra);
 
   const [cart, setCart] = useState([]); 
 

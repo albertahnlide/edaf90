@@ -3,7 +3,7 @@ import inventory from './inventory.mjs';
 import Salad from './Salad';
 
 function ComposeSalad(props) {
-  const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
+  // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
   const [foundation, setFoundation] = useState('placeholder1');
   const [protein, setProtein] = useState('placeholder2');
   const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
@@ -27,11 +27,11 @@ function ComposeSalad(props) {
 
     
 
-    function makeOptionsWPrice(inv, prop) {
+    function makeOptionsWPrice(inv, property) {
       const options = [
         <option value="placeholder1" hidden key="placeholder1">Gör ditt val</option>,
         ...Object.entries(inv)
-          .filter(([name, properties]) => properties[prop])
+          .filter(([name, properties]) => properties[property])
           .map(([name, properties]) => (
             <option value={name} key={name}>
               {name}, {properties.price}kr
@@ -42,11 +42,11 @@ function ComposeSalad(props) {
       return options;
     }
 
-    function makeOptionsWOPrice(inv, prop) {
+    function makeOptionsWOPrice(inv, property) {
       const options = [
         <option value="placeholder2" hidden key="placeholder2">Gör ditt val</option>,
         ...Object.entries(inv)
-          .filter(([name, properties]) => properties[prop])
+          .filter(([name, properties]) => properties[property])
           .map(([name]) => (
             <option value={name} key={name}>
               {name}
@@ -57,9 +57,9 @@ function ComposeSalad(props) {
       return options;
     }
 
-    function makeCheckboxes(inv, prop) {
+    function makeCheckboxes(inv, property) {
       const checkboxes = Object.entries(inv)
-        .filter(([name, properties]) => properties[prop])
+        .filter(([name, properties]) => properties[property])
         .map(([name, properties]) => (
           <span style={{ fontSize: '0.94em' }}>
             <input type="checkbox" name={name} value={name} onChange={handelExtra} checked={extras[name] || false}/> {name} ({properties.price}kr)
