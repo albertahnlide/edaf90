@@ -3,6 +3,7 @@ import inventory from './inventory.mjs';
 import ComposeSalad from './ComposeSalad';
 import Salad from './Salad';
 import { useState } from 'react';
+import ViewOrder from './ViewOrder';
 
 function App() {
   let extras = Object.keys(inventory).filter(name => inventory[name].extra);
@@ -10,28 +11,20 @@ function App() {
   const [cart, setCart] = useState([]); 
 
 
-  function addSaladToCart(newSalad) {
-    setCart([...cart, newSalad]); 
+  function addToCart(newSalad) {
+    setCart(cart => [...cart, newSalad]); 
   }
+
   return (
     <div className="container py-4">
       <header className="pb-3 mb-4 border-bottom">
         <span className="fs-4">Min egen salladsbar</span>
       </header>
 
-     
-        <div className="row h-200 p-5 bg-light border rounded-3">
-          <h2>Varukorgen</h2>
-          <ul>
-          {cart.map((salad, index) => (
-            <li key={index}>Salad {index + 1}: {JSON.stringify(salad)}</li> 
-          ))}
-        </ul>
-        </div>
+      <ViewOrder cart={cart}></ViewOrder>
+
+      <ComposeSalad inventory={inventory} onAddToCart={addToCart}> </ComposeSalad> 
       
-
-
-      <ComposeSalad inventory={inventory} onAddSalad={addSaladToCart}> </ComposeSalad> 
 
 
       <footer className="pt-3 mt-4 text-muted border-top">

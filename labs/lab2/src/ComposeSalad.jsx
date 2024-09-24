@@ -73,18 +73,27 @@ function ComposeSalad(props) {
     
     function handleSubmit(event) {
       event.preventDefault();
-      const salad = new Salad();
-      salad.add(foundation, props.inventory[foundation]);
-      salad.add(protein, props.inventory[protein]);
+
+      if (
+        foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
+      ) {
+        alert('Du måste fylla i alla fält och välja minst två extra tillbehör för att beställa en sallad!');
+        return;
+      }
+
+
+      const salad = new Salad()
+      .add(foundation, props.inventory[foundation])
+      .add(protein, props.inventory[protein])
+      .add(dressing, props.inventory[dressing]);
       Object.keys(extras).forEach(name => {
         if (extras[name]) {
           salad.add(name, props.inventory[name]);
         }
       });
-      salad.add(dressing, props.inventory[dressing]);
-  
-      // Call the onAddSalad callback function passed by App
-      props.onAddSalad(salad);
+      
+      // Call the onAddToCart callback function passed by App
+      props.onAddToCart(salad);
   
       // Reset the form
       setFoundation('placeholder1');
@@ -119,8 +128,8 @@ function ComposeSalad(props) {
 
 
           <div className="mt-4">
-          <label className="form-label">Välj extra</label>
-          <div className="row row-cols-4" id="extra">
+          <label className="form-label" >Välj extra</label>
+          <div className="row row-cols-4" id="extra">  
             {(() => {
               const checkboxes = makeCheckboxes(inventory, 'extra');
               return checkboxes.map((checkbox, index) => (

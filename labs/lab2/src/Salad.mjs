@@ -6,6 +6,7 @@ class Salad {
       this.id = 'salad_' + Salad.#instanceCounter++;
       if (salad instanceof Salad && Array.isArray(salad.ingredients)) {
         this.ingredients = salad.ingredients;
+        this.uuid = salad.uuid;
       } else {
         this.ingredients = [];
       }
@@ -20,6 +21,10 @@ class Salad {
     }
     getPrice() {
       return this.ingredients.reduce((sum, ingredient) => sum + ingredient.properties.price, 0);
+    }
+
+    getIngredients() {
+      return this.ingredients.map(ingredient => ingredient.name).join(' ');
     }
   }
   export default Salad;
