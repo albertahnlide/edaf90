@@ -118,8 +118,6 @@ function ComposeSalad(props) {
           </div>
 
 
-
-
           <div className="mt-4">
           <label className="form-label">Välj extra</label>
           <div className="row row-cols-4" id="extra">

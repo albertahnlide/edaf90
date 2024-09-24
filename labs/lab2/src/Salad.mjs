@@ -18,5 +18,8 @@ class Salad {
       this.ingredients = this.ingredients.filter(ingredient => ingredient.name !== name);
       return this;
     }
+    getPrice() {
+      return this.ingredients.reduce((sum, ingredient) => sum + ingredient.properties.price, 0);
+    }
   }
   export default Salad;
