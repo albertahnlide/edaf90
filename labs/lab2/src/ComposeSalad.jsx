@@ -84,13 +84,13 @@ function ComposeSalad(props) {
 
       const salad = new Salad()
       .add(foundation, props.inventory[foundation])
-      .add(protein, props.inventory[protein])
-      .add(dressing, props.inventory[dressing]);
+      .add(protein, props.inventory[protein]);
       Object.keys(extras).forEach(name => {
         if (extras[name]) {
           salad.add(name, props.inventory[name]);
         }
       });
+      salad.add(dressing, props.inventory[dressing]);
       
       // Call the onAddToCart callback function passed by App
       props.onAddToCart(salad);
