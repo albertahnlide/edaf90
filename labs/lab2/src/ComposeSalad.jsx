@@ -162,8 +162,6 @@ function ComposeSalad(props) {
       </div>
     </div>
 </form>
-
   );
-  
 }
 export default ComposeSalad;
