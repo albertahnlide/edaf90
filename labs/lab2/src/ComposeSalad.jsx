@@ -92,10 +92,10 @@ function ComposeSalad(props) {
       });
       salad.add(dressing, props.inventory[dressing]);
       
-      // Call the onAddToCart callback function passed by App
+      
       props.onAddToCart(salad);
   
-      // Reset the form
+      
       setFoundation('placeholder1');
       setProtein('placeholder2');
       setExtra({});
