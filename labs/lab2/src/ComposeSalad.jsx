@@ -77,20 +77,20 @@ function ComposeSalad(props) {
       if (
         foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
       ) {
-        alert('Du måste fylla i alla fält och välja minst två extra tillbehör för att beställa en sallad!');
+        alert('Du måste fylla i alla fält och välja minst två extras för att beställa en sallad!');
         return;
       }
 
 
       const salad = new Salad()
-      .add(foundation, props.inventory[foundation])
-      .add(protein, props.inventory[protein]);
+      .add(foundation, inventory[foundation])
+      .add(protein, inventory[protein]);
       Object.keys(extras).forEach(name => {
         if (extras[name]) {
-          salad.add(name, props.inventory[name]);
+          salad.add(name, inventory[name]);
         }
       });
-      salad.add(dressing, props.inventory[dressing]);
+      salad.add(dressing, inventory[dressing]);
       
       
       props.onAddToCart(salad);
