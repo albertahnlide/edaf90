@@ -1,4 +1,5 @@
 import React from 'react';
+import './ViewOrder.css'
 
 function ViewOrder({cart}) {
     return (
@@ -8,7 +9,7 @@ function ViewOrder({cart}) {
             
           {cart.map((salad) => (
             // <li key={index}>Salad {index + 1}: {salad.getIngredients() + ", " + salad.getPrice()+"kr" }</li> 
-            <div key={salad.uuid}>{salad.getIngredients() + ", pris: " + salad.getPrice()+"kr" }</div> 
+            <div className="orderitem" key={salad.uuid}>{salad.getIngredients() + ", pris: " + salad.getPrice()+"kr" }</div> 
             
           ))}
         </fieldset>
