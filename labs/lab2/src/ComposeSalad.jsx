@@ -111,8 +111,8 @@ function ComposeSalad(props) {
 
 
         <div className="mt-4">
-          {/* <label htmlFor="foundation" className="form-label">Välj bas (10kr)</label> */}
-          <h5>Välj bas (10kr)</h5>
+          <label htmlFor="foundation" className="form-label">Välj bas (10kr)</label>
+          {/* <h5>Välj bas (10kr)</h5> */}
           <select value={foundation} onChange={handelFoundation} className="form-select" id="foundation">
             {makeOptionsWOPrice(inventory, 'foundation')}
           </select>
@@ -121,8 +121,8 @@ function ComposeSalad(props) {
 
 
           <div className="mt-4">
-          {/* <label htmlFor="protein" className="form-label">Välj protein</label> */}
-          <h5>Välj protein</h5>
+          <label htmlFor="protein" className="form-label">Välj protein</label>
+          {/* <h5>Välj protein</h5> */}
           <select value={protein} onChange={handelProtein} className="form-select" id="protein">
             {makeOptionsWPrice(inventory, 'protein')}
           </select>
@@ -130,8 +130,8 @@ function ComposeSalad(props) {
 
 
           <div className="mt-4">
-          {/* <label className="form-label" >Välj extra</label> */} {/* Ville använda men det blev ett tyst fel med att labeln inte var kopplat till något element */}
-          <h5>Välj extra</h5>
+          <label className="form-label" >Välj extra</label>  {/* Ville använda men det blev ett tyst fel med att labeln inte var kopplat till något element
+          {/* <h5>Välj extra</h5> */}
           <div className="row row-cols-4" id="extra">  
             {(() => {
               const checkboxes = makeCheckboxes(inventory, 'extra');
@@ -147,8 +147,8 @@ function ComposeSalad(props) {
 
 
           <div className="mt-4">
-          {/* <label htmlFor="dressing" className="form-label">Välj dressing (5kr)</label> */}
-          <h5>Välj dressing (5kr)</h5>
+          <label htmlFor="dressing" className="form-label">Välj dressing (5kr)</label>
+          {/* <h5>Välj dressing (5kr)</h5> */}
           <select value={dressing} onChange={handelDressing} className="form-select" id="dressing">
             {makeOptionsWOPrice(inventory, 'dressing')}
           </select>
