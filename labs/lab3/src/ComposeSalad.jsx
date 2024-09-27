@@ -2,38 +2,36 @@ import { useState } from 'react';
 import inventory from './inventory.mjs';
 import Salad from './Salad';
 import { useOutletContext } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 function ComposeSalad(props) {
 
-  const { inventory, addSalad } = useOutletContext();
+  const { inventory, addToCart } = useOutletContext();
+  const navigate = useNavigate();
 
   // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
   const [foundation, setFoundation] = useState('');
   const [protein, setProtein] = useState('');
-  const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
+  const [extras, setExtra] = useState('');
   const [dressing, setDressing] = useState('');
 
   const [touched, setTouched] = useState(false);
 
 
-  function handelFoundation(event) {
+  function handleFoundation(event) {
     setFoundation(event.target.value);
     }
 
-    function handelProtein(event) {
+    function handleProtein(event) {
       setProtein(event.target.value);
     }
 
-    function handelExtra(event) {
+    function handleExtra(event) {
       setExtra({ ...extras, [event.target.name]: event.target.checked });
     }
 
-    function handelDressing(event) {
+    function handleDressing(event) {
       setDressing(event.target.value);
-    }
-
-    function handelTouched(event) {
-      setTouched(true)
     }
 
     
@@ -73,7 +71,7 @@ function ComposeSalad(props) {
         .filter(([name, properties]) => properties[property])
         .map(([name, properties]) => (
           <span style={{ fontSize: '0.94em' }}>
-            <input type="checkbox" name={name} value={name} onChange={handelExtra} checked={extras[name] || false}/> {name} ({properties.price}kr)
+            <input type="checkbox" name={name} value={name} onChange={handleExtra} checked={extras[name] || false}/> {name} ({properties.price}kr)
           </span>
         ));
 
@@ -87,7 +85,6 @@ function ComposeSalad(props) {
 
       if(!event.target.checkValidity()){ 
         setTouched(true);
-        <div className="invalid-feedback">VÄLJ NÅGOT DÅ</div>
       }
       else{
         setTouched(false);
@@ -110,13 +107,15 @@ function ComposeSalad(props) {
         salad.add(dressing, inventory[dressing]);
         
         
-        props.onAddToCart(salad);
+        addToCart(salad);
     
         
         setFoundation('');
         setProtein('');
         setExtra({});
         setDressing('');
+        // navigate('/view-order');
+        navigate(`/view-order/confirm/${salad.uuid}`);
       }
     }
   return (
@@ -132,7 +131,7 @@ function ComposeSalad(props) {
         <div className="mt-4">
           <label htmlFor="foundation" className="form-label">Välj bas (10kr)</label>
           {/* <h5>Välj bas (10kr)</h5> */}
-          <select value={foundation} onChange={handelFoundation} className="form-select" id="foundation" required>
+          <select value={foundation} onChange={handleFoundation} className="form-select" id="foundation" required>
             {makeOptionsWOPrice(inventory, 'foundation')}
           </select>
           <div className="invalid-feedback">Du måste välja en bas</div>  {/* Feedback placed here */}
@@ -143,7 +142,7 @@ function ComposeSalad(props) {
           <div className="mt-4">
           <label htmlFor="protein" className="form-label">Välj protein</label>
           {/* <h5>Välj protein</h5> */}
-          <select value={protein} onChange={handelProtein} className="form-select" id="protein" required>
+          <select value={protein} onChange={handleProtein} className="form-select" id="protein" required>
             {makeOptionsWPrice(inventory, 'protein')}
           </select>
           <div className="invalid-feedback">Du måste välja ett protein</div>  {/* Feedback placed here */}
@@ -170,7 +169,7 @@ function ComposeSalad(props) {
           <div className="mt-4">
           <label htmlFor="dressing" className="form-label">Välj dressing (5kr)</label>
           {/* <h5>Välj dressing (5kr)</h5> */}
-          <select value={dressing} onChange={handelDressing} className="form-select" id="dressing" required>
+          <select value={dressing} onChange={handleDressing} className="form-select" id="dressing" required>
             {makeOptionsWOPrice(inventory, 'dressing')}
           </select>
           <div className="invalid-feedback">Du måste välja en dressing</div>  {/* Feedback placed here */}

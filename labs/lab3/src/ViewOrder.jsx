@@ -4,7 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 
 function ViewOrder(props) {
 
-  const { inventory, cart } = useOutletContext();
+  const {cart} = useOutletContext();
 
     return (
         <div className="row h-200 p-5 bg-light border rounded-3">

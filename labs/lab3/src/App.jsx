@@ -1,13 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import inventory from './inventory.mjs';
-import ComposeSalad from './ComposeSalad';
 import { useState } from 'react';
-import ViewOrder from './ViewOrder';
 import { Outlet } from 'react-router-dom';
+import Navbar from './Navbar';
 
 
 
-function App() {
+function App(props) {
   // let extras = Object.keys(inventory).filter(name => inventory[name].extra);
 
   const [cart, setCart] = useState([]); 
@@ -23,6 +22,7 @@ function App() {
         <span className="fs-4">Min egen salladsbar</span>
       </header>
 
+      <Navbar />
 
       <Outlet context={{ inventory, addToCart, cart }} />
 
