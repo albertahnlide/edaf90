@@ -4,10 +4,10 @@ import Salad from './Salad';
 
 function ComposeSalad(props) {
   // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
-  const [foundation, setFoundation] = useState('placeholder1');
-  const [protein, setProtein] = useState('placeholder2');
+  const [foundation, setFoundation] = useState('');
+  const [protein, setProtein] = useState('');
   const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
-  const [dressing, setDressing] = useState('placeholder2');
+  const [dressing, setDressing] = useState('');
 
   function handelFoundation(event) {
     setFoundation(event.target.value);
@@ -29,7 +29,7 @@ function ComposeSalad(props) {
 
     function makeOptionsWPrice(inv, property) {
       const options = [
-        <option value="placeholder1" hidden key="placeholder1">Gör ditt val</option>,
+        <option value="" hidden key="placeholder1">Gör ditt val</option>,
         ...Object.entries(inv)
           .filter(([name, properties]) => properties[property])
           .map(([name, properties]) => (
@@ -44,7 +44,7 @@ function ComposeSalad(props) {
 
     function makeOptionsWOPrice(inv, property) {
       const options = [
-        <option value="placeholder2" hidden key="placeholder2">Gör ditt val</option>,
+        <option value="" hidden key="placeholder2">Gör ditt val</option>,
         ...Object.entries(inv)
           .filter(([name, properties]) => properties[property])
           .map(([name]) => (
@@ -75,7 +75,7 @@ function ComposeSalad(props) {
       event.preventDefault();
 
       if (
-        foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
+        foundation === '' || protein === '' || dressing === '' || Object.values(extras).filter(value => value).length < 2
       ) {
         alert('Du måste fylla i alla fält och välja minst två extras för att beställa en sallad!');
         return;
@@ -96,10 +96,10 @@ function ComposeSalad(props) {
       props.onAddToCart(salad);
   
       
-      setFoundation('placeholder1');
-      setProtein('placeholder2');
+      setFoundation('');
+      setProtein('');
       setExtra({});
-      setDressing('placeholder2');
+      setDressing('');
     }
 
   return (

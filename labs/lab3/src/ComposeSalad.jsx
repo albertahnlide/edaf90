@@ -4,10 +4,13 @@ import Salad from './Salad';
 
 function ComposeSalad(props) {
   // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
-  const [foundation, setFoundation] = useState('placeholder1');
-  const [protein, setProtein] = useState('placeholder2');
+  const [foundation, setFoundation] = useState('');
+  const [protein, setProtein] = useState('');
   const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
-  const [dressing, setDressing] = useState('placeholder2');
+  const [dressing, setDressing] = useState('');
+
+  const [touched, setTouched] = useState(false);
+
 
   function handelFoundation(event) {
     setFoundation(event.target.value);
@@ -25,11 +28,15 @@ function ComposeSalad(props) {
       setDressing(event.target.value);
     }
 
+    function handelTouched(event) {
+      setTouched(true)
+    }
+
     
 
     function makeOptionsWPrice(inv, property) {
       const options = [
-        <option value="placeholder1" hidden key="placeholder1">Gör ditt val</option>,
+        <option value="" hidden key="placeholder1">Gör ditt val</option>,
         ...Object.entries(inv)
           .filter(([name, properties]) => properties[property])
           .map(([name, properties]) => (
@@ -44,7 +51,7 @@ function ComposeSalad(props) {
 
     function makeOptionsWOPrice(inv, property) {
       const options = [
-        <option value="placeholder2" hidden key="placeholder2">Gör ditt val</option>,
+        <option value="" hidden key="placeholder2">Gör ditt val</option>,
         ...Object.entries(inv)
           .filter(([name, properties]) => properties[property])
           .map(([name]) => (
@@ -74,12 +81,16 @@ function ComposeSalad(props) {
     function handleSubmit(event) {
       event.preventDefault();
 
-      if (
-        foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
-      ) {
-        alert('Du måste fylla i alla fält och välja minst två extras för att beställa en sallad!');
-        return;
+      if(!event.target.checkValidity()){ 
+        <div className="invalid-feedback">VÄLJ NÅGOT DÅ</div>
       }
+
+      // if (
+      //   foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
+      // ) {
+      //   alert('Du måste fylla i alla fält och välja minst två extras för att beställa en sallad!');
+      //   return;
+      // }
 
 
       const salad = new Salad()
@@ -96,14 +107,15 @@ function ComposeSalad(props) {
       props.onAddToCart(salad);
   
       
-      setFoundation('placeholder1');
-      setProtein('placeholder2');
+      setFoundation('');
+      setProtein('');
       setExtra({});
-      setDressing('placeholder2');
+      setDressing('');
     }
 
   return (
-    <form onSubmit={handleSubmit}>
+    
+    <form className={touched ? "was-validated" : ""} onSubmit={handleSubmit} noValidate>
     <div className="continer col-12</div>">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
@@ -113,7 +125,7 @@ function ComposeSalad(props) {
         <div className="mt-4">
           <label htmlFor="foundation" className="form-label">Välj bas (10kr)</label>
           {/* <h5>Välj bas (10kr)</h5> */}
-          <select value={foundation} onChange={handelFoundation} className="form-select" id="foundation">
+          <select value={foundation} onChange={handelFoundation && handelTouched} className="form-select" id="foundation" required>
             {makeOptionsWOPrice(inventory, 'foundation')}
           </select>
           </div>
@@ -123,14 +135,14 @@ function ComposeSalad(props) {
           <div className="mt-4">
           <label htmlFor="protein" className="form-label">Välj protein</label>
           {/* <h5>Välj protein</h5> */}
-          <select value={protein} onChange={handelProtein} className="form-select" id="protein">
+          <select value={protein} onChange={handelProtein && handelTouched} className="form-select" id="protein" required>
             {makeOptionsWPrice(inventory, 'protein')}
           </select>
           </div>
 
 
           <div className="mt-4">
-          <label className="form-label" >Välj extra</label>  {/* Ville använda men det blev ett tyst fel med att labeln inte var kopplat till något element
+          <label className="form-label" >Välj extra</label>  {/* Ville använda men det blev ett tyst fel med att labeln inte var kopplat till något element */}
           {/* <h5>Välj extra</h5> */}
           <div className="row row-cols-4" id="extra">  
             {(() => {
@@ -149,10 +161,13 @@ function ComposeSalad(props) {
           <div className="mt-4">
           <label htmlFor="dressing" className="form-label">Välj dressing (5kr)</label>
           {/* <h5>Välj dressing (5kr)</h5> */}
-          <select value={dressing} onChange={handelDressing} className="form-select" id="dressing">
+          <select value={dressing} onChange={handelDressing && handelTouched} className="form-select" id="dressing" required>
             {makeOptionsWOPrice(inventory, 'dressing')}
           </select>
           </div>
+
+
+          
 
 
 
