@@ -1,7 +1,11 @@
 import React from 'react';
 import './ViewOrder.css'
+import { useOutletContext } from 'react-router-dom';
 
-function ViewOrder({cart}) {
+function ViewOrder(props) {
+
+  const { inventory, cart } = useOutletContext();
+
     return (
         <div className="row h-200 p-5 bg-light border rounded-3">
           <h2>Varukorgen</h2>

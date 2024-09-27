@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import inventory from './inventory.mjs';
 import Salad from './Salad';
+import { useOutletContext } from 'react-router-dom';
 
 function ComposeSalad(props) {
+
+  const { inventory, addSalad } = useOutletContext();
+
   // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
   const [foundation, setFoundation] = useState('');
   const [protein, setProtein] = useState('');
@@ -82,52 +86,56 @@ function ComposeSalad(props) {
       event.preventDefault();
 
       if(!event.target.checkValidity()){ 
+        setTouched(true);
         <div className="invalid-feedback">VÄLJ NÅGOT DÅ</div>
       }
+      else{
+        setTouched(false);
+        // if (
+        //   foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
+        // ) {
+        //   alert('Du måste fylla i alla fält och välja minst två extras för att beställa en sallad!');
+        //   return;
+        // }
 
-      // if (
-      //   foundation === 'placeholder1' || protein === 'placeholder2' || dressing === 'placeholder2' || Object.values(extras).filter(value => value).length < 2
-      // ) {
-      //   alert('Du måste fylla i alla fält och välja minst två extras för att beställa en sallad!');
-      //   return;
-      // }
 
-
-      const salad = new Salad()
-      .add(foundation, inventory[foundation])
-      .add(protein, inventory[protein]);
-      Object.keys(extras).forEach(name => {
-        if (extras[name]) {
-          salad.add(name, inventory[name]);
-        }
-      });
-      salad.add(dressing, inventory[dressing]);
-      
-      
-      props.onAddToCart(salad);
-  
-      
-      setFoundation('');
-      setProtein('');
-      setExtra({});
-      setDressing('');
+        const salad = new Salad()
+        .add(foundation, inventory[foundation])
+        .add(protein, inventory[protein]);
+        Object.keys(extras).forEach(name => {
+          if (extras[name]) {
+            salad.add(name, inventory[name]);
+          }
+        });
+        salad.add(dressing, inventory[dressing]);
+        
+        
+        props.onAddToCart(salad);
+    
+        
+        setFoundation('');
+        setProtein('');
+        setExtra({});
+        setDressing('');
+      }
     }
-
   return (
     
     <form className={touched ? "was-validated" : ""} onSubmit={handleSubmit} noValidate>
     <div className="continer col-12</div>">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
+
         <fieldset className="col-md-12">
 
 
         <div className="mt-4">
           <label htmlFor="foundation" className="form-label">Välj bas (10kr)</label>
           {/* <h5>Välj bas (10kr)</h5> */}
-          <select value={foundation} onChange={handelFoundation && handelTouched} className="form-select" id="foundation" required>
+          <select value={foundation} onChange={handelFoundation} className="form-select" id="foundation" required>
             {makeOptionsWOPrice(inventory, 'foundation')}
           </select>
+          <div className="invalid-feedback">Du måste välja en bas</div>  {/* Feedback placed here */}
           </div>
 
 
@@ -135,9 +143,10 @@ function ComposeSalad(props) {
           <div className="mt-4">
           <label htmlFor="protein" className="form-label">Välj protein</label>
           {/* <h5>Välj protein</h5> */}
-          <select value={protein} onChange={handelProtein && handelTouched} className="form-select" id="protein" required>
+          <select value={protein} onChange={handelProtein} className="form-select" id="protein" required>
             {makeOptionsWPrice(inventory, 'protein')}
           </select>
+          <div className="invalid-feedback">Du måste välja ett protein</div>  {/* Feedback placed here */}
           </div>
 
 
@@ -148,7 +157,7 @@ function ComposeSalad(props) {
             {(() => {
               const checkboxes = makeCheckboxes(inventory, 'extra');
               return checkboxes.map((checkbox, index) => (
-                <div className="col" key={index}>
+                <div className="col" key={index} required>
                   {checkbox}
                 </div>
               ));
@@ -161,17 +170,16 @@ function ComposeSalad(props) {
           <div className="mt-4">
           <label htmlFor="dressing" className="form-label">Välj dressing (5kr)</label>
           {/* <h5>Välj dressing (5kr)</h5> */}
-          <select value={dressing} onChange={handelDressing && handelTouched} className="form-select" id="dressing" required>
+          <select value={dressing} onChange={handelDressing} className="form-select" id="dressing" required>
             {makeOptionsWOPrice(inventory, 'dressing')}
           </select>
+          <div className="invalid-feedback">Du måste välja en dressing</div>  {/* Feedback placed here */}
           </div>
 
 
           
 
 
-
-          
           <div> 
           <button type="submit" className="btn btn-primary mt-4">Beställ</button>
           </div>
