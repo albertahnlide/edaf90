@@ -70,7 +70,7 @@ function ComposeSalad(props) {
       const checkboxes = Object.entries(inv)
         .filter(([name, properties]) => properties[property])
         .map(([name, properties]) => (
-          <span style={{ fontSize: '0.94em' }}>
+          <span style={{ fontSize: '0.9em' }}>
             <input type="checkbox" name={name} value={name} onChange={handleExtra} checked={extras[name] || false}/> {name} ({properties.price}kr)
           </span>
         ));
@@ -116,13 +116,14 @@ function ComposeSalad(props) {
         setDressing('');
         // navigate('/view-order');
         navigate(`/view-order/confirm/${newSalad.uuid}`);
-        console.log(newSalad.uuid);
       }
     }
   return (
     
     <form className={touched ? "was-validated" : ""} onSubmit={handleSubmit} noValidate>
-    <div className="continer col-12</div>">
+
+    <div  className="container col-12">
+    <div className="continer col-12">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
 
@@ -187,6 +188,7 @@ function ComposeSalad(props) {
 
       </fieldset>
       </div>
+    </div>
     </div>
 </form>
   );

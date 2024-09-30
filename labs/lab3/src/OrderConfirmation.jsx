@@ -8,15 +8,11 @@ const OrderConfirmation = () => {
   const item = cart.find((item) => item.uuid === uuid); // Find the item with the matching uuid
 
   return (
-    <div className="row h-200 p-4 border rounded-3" style={{ backgroundColor: 'rgba(20, 140, 50, 0.3)' }}>
-      {item ? (
+      <div className=" p-4 border rounded-3 mb-2" style={{ backgroundColor: 'rgba(20, 140, 50, 0.3)' }}>
         <div key={item.uuid}>
           En sallad har lagts till i varukorgen. {item.getIngredients()}, pris: {item.getPrice()}kr
         </div>
-      ) : (
-        <p>No items in the cart.</p>
-      )}
-    </div>
+      </div>
   );
 };
 
