@@ -1,41 +1,23 @@
 import React from 'react';
-import { useParams, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function OrderConfirmation() {
-  const { uuid } = useParams();  
-  const { cart } = useOutletContext(); 
-
-  // Find the salad in the cart using the UUID
-  const salad = cart.find(item => item.uuid === uuid); 
-
-  if (!salad) {
-    return <h4>Order not found!</h4>;
-  }
+const OrderConfirmation = () => {
+  const { cart = [] } = useOutletContext(); // Default to an empty array if cart is undefined
+  const { uuid } = useParams(); // Get the uuid from the URL parameters
+  const item = cart.find((item) => item.uuid === uuid); // Find the item with the matching uuid
 
   return (
-    <div>
-      <h2>Order Confirmation</h2>
-      <p>Order ID: {uuid}</p>
-      <p>Your salad has been successfully added to the order!</p>
-
-      <h4>Salad Details:</h4>
-      <ul>
-        <li>Foundation: {salad.ingredients.find(ingredient => ingredient.name === 'foundation')?.properties?.name}</li>
-        <li>Protein: {salad.ingredients.find(ingredient => ingredient.name === 'protein')?.properties?.name}</li>
-        <li>Extras: {salad.ingredients.filter(ingredient => ingredient.name === 'extra').map(ingredient => ingredient.properties.name).join(", ")}</li>
-        <li>Dressing: {salad.ingredients.find(ingredient => ingredient.name === 'dressing')?.properties?.name}</li>
-      </ul>
-
-      <h4>Your Shopping Basket:</h4>
-      <ul>
-        {cart.map((item, index) => (
-          <li key={item.uuid}>
-            Salad {index + 1}: {item.getIngredients() + ", price: " + item.getPrice() + "kr"}
-          </li>
-        ))}
-      </ul>
+    <div className="row h-200 p-4 border rounded-3" style={{ backgroundColor: 'rgba(20, 140, 50, 0.3)' }}>
+      {item ? (
+        <div key={item.uuid}>
+          En sallad har lagts till i varukorgen. {item.getIngredients()}, pris: {item.getPrice()}kr
+        </div>
+      ) : (
+        <p>No items in the cart.</p>
+      )}
     </div>
   );
-}
+};
 
 export default OrderConfirmation;

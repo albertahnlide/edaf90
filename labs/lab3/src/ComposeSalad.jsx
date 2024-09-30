@@ -96,18 +96,18 @@ function ComposeSalad(props) {
         // }
 
 
-        const salad = new Salad()
+        const newSalad = new Salad()
         .add(foundation, inventory[foundation])
         .add(protein, inventory[protein]);
         Object.keys(extras).forEach(name => {
           if (extras[name]) {
-            salad.add(name, inventory[name]);
+            newSalad.add(name, inventory[name]);
           }
         });
-        salad.add(dressing, inventory[dressing]);
+        newSalad.add(dressing, inventory[dressing]);
         
         
-        addToCart(salad);
+        addToCart(newSalad);
     
         
         setFoundation('');
@@ -115,7 +115,8 @@ function ComposeSalad(props) {
         setExtra({});
         setDressing('');
         // navigate('/view-order');
-        navigate(`/view-order/confirm/${salad.uuid}`);
+        navigate(`/view-order/confirm/${newSalad.uuid}`);
+        console.log(newSalad.uuid);
       }
     }
   return (

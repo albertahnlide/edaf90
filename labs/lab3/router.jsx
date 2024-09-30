@@ -7,7 +7,8 @@ import OrderConfirmation from "./src/OrderConfirmation";
 
 const router = createBrowserRouter([
   {
-    Component: App,
+    path: "/",
+    element: <App />,
     errorElement: <ErrorBoundary />,
     children: [
       {
@@ -20,21 +21,22 @@ const router = createBrowserRouter([
         children: [
           {
             path: "confirm/:uuid", 
-            Component: OrderConfirmation,  
+            Component: OrderConfirmation ,  
           },
         ],
       },
       {
         index: true,
         element: (
-          <div className="continer col-12</div>">
-          <div className="row h-200 p-5 bg-light border rounded-3">
-          <h3>Welcome to my own salad bar</h3>
+          <div className="container col-12">
+            <div className="row h-200 p-5 bg-light border rounded-3">
+              <h3>Welcome to my own salad bar</h3>
+            </div>
           </div>
-          </div>)
-      }
-    ]
-  }
+        ),
+      },
+    ],
+  },
 ]);
 
 export default router;
