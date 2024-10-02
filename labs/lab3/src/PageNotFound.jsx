@@ -2,7 +2,7 @@ import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Navbar from './Navbar';
 
-function ErrorBoundary(props) {
+function PageNotFound(props) {
 
   return (
     <div className="container py-4">
@@ -24,4 +24,4 @@ function ErrorBoundary(props) {
   );
     }
 
-export default ErrorBoundary;
+export default PageNotFound;

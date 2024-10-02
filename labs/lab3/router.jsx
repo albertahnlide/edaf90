@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from './src/App';
 import ComposeSalad from "./src/ComposeSalad";
-import ViewOrder from "./src/ViewOrder";
-import ErrorBoundary from './src/ErrorBoundary';  
+import ViewOrder from "./src/ViewOrder"; 
+import PageNotFound from "./src/PageNotFound";
 import OrderConfirmation from "./src/OrderConfirmation";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorBoundary />,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: "compose-salad",
