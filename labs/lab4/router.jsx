@@ -13,14 +13,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "compose-salad",
+        loader: inventoryLoader,
         Component: ComposeSalad,
       },
       {
         path: "view-order",
+        // loader: inventoryLoader,
         Component: ViewOrder,
         children: [
           {
             path: "confirm/:uuid", 
+            // loader: inventoryLoader,
             Component: OrderConfirmation ,  
           },
         ],
@@ -38,5 +41,12 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+
+async function inventoryLoader() {
+  const inventory = { Sallad: { price: 10, foundation: true, vegan: true } };
+  await new Promise(resolve => setTimeout(resolve, 500));
+  return inventory;
+  }
 
 export default router;

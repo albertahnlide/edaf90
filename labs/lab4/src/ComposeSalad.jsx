@@ -4,9 +4,16 @@ import Salad from './Salad';
 import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; 
 
+import { useLoaderData } from 'react-router-dom';
+
+
 function ComposeSalad(props) {
 
-  const { inventory, addToCart } = useOutletContext();
+  
+
+  const inventory = useLoaderData();
+
+  //const { inventory, addToCart } = useOutletContext();
   const navigate = useNavigate();
 
   // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
