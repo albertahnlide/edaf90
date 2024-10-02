@@ -13,7 +13,7 @@ function ComposeSalad(props) {
 
   const inventory = useLoaderData();
 
-  //const { inventory, addToCart } = useOutletContext();
+  const { addToCart } = useOutletContext();
   const navigate = useNavigate();
 
   // const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);

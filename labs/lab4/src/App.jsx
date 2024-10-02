@@ -1,12 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.css'
-import inventory from './inventory.mjs';
+//import inventory from './inventory.mjs';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
+import { useNavigation } from 'react-router-dom';
+import Spinner from './Spinner';
+
 
 
 
 function App(props) {
+  const navigation = useNavigation();
   // let extras = Object.keys(inventory).filter(name => inventory[name].extra);
 
   const [cart, setCart] = useState([]); 
@@ -34,13 +38,12 @@ function App(props) {
   }
 
   return (
-    <div  className="container col-12">
+    <div className="container col-12">
       <Header />
       <Navbar />
-      <Outlet context={{ inventory, addToCart, cart }} />
+      {navigation.state === "loading" ? <Spinner /> : <Outlet context={{ addToCart, cart }} />}
       <Footer />
     </div>
-
   );
 }
 

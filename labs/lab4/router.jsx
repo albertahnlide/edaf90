@@ -44,9 +44,45 @@ const router = createBrowserRouter([
 
 
 async function inventoryLoader() {
-  const inventory = { Sallad: { price: 10, foundation: true, vegan: true } };
+  // const inventory = { Sallad: { price: 10, foundation: true, vegan: true } };
+  const foundationList = await safeFetchJson("http://localhost:8080/foundations");
+  const proteinList = await safeFetchJson("http://localhost:8080/proteins");
+  const extraList = await safeFetchJson("http://localhost:8080/extras");
+  const dressingList = await safeFetchJson("http://localhost:8080/dressings");
+  const inventory = {};
+
+ await makeInventory("foundations", foundationList, inventory);
+ await makeInventory("proteins", proteinList, inventory);
+ await makeInventory("extras", extraList, inventory);
+ await makeInventory("dressings", dressingList, inventory);
+  
+  
   await new Promise(resolve => setTimeout(resolve, 500));
   return inventory;
   }
+
+  async function fetchIngredient(type, name) {
+    return await safeFetchJson(`http://localhost:8080/${type}/${name}`);
+  }
+
+  async function makeInventory(type, list, inventory){
+    const promises = list.map(async (name) => {
+      inventory[name] = await fetchIngredient(type, name);
+    });
+  
+    // Wait for all the promises to resolve
+    await Promise.all(promises);
+  }
+
+
+  function safeFetchJson(url) {
+    return fetch(url)
+    .then(response => {
+    if(!response.ok) {
+    throw new Error(`${url} returned status ${response.status}`);
+    }
+    return response.json();
+    });
+    }
 
 export default router;
