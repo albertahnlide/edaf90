@@ -16,21 +16,31 @@ function App(props) {
     setCart(cart => [...cart, newSalad]); 
   }
 
-  return (
-    <div className="container py-4">
-    <header className="pb-3 mb-4 border-bottom">
+
+  function Header(){
+    return (
+      <header className="pb-3 mb-4 border-bottom">
         <span className="fs-4">Min egen salladsbar</span>
       </header>
+    );
+  }
 
-      <Navbar />
-
-      <Outlet context={{ inventory, addToCart, cart }} />
-
-      
-    <footer className="pt-3 mt-4 text-muted border-top">
+  function Footer() {
+    return (
+      <footer className="pt-3 mt-4 text-muted border-top">
         EDAF90 - webprogrammering
       </footer>
+    );
+  }
+
+  return (
+    <div  className="container col-12">
+      <Header />
+      <Navbar />
+      <Outlet context={{ inventory, addToCart, cart }} />
+      <Footer />
     </div>
+
   );
 }
 

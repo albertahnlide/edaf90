@@ -2,7 +2,7 @@ import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Navbar from './Navbar';
 
-function ErrorBoundary(props) {
+function PageNotFound(props) {
 
   return (
     <div className="container py-4">
@@ -12,7 +12,8 @@ function ErrorBoundary(props) {
 
       <Navbar />
 
-      <div className=" p-4 border rounded-3 mb-2" style={{ backgroundColor: 'rgba(200, 0, 0, 0.9)' }}>
+      {/* <div className=" p-4 border rounded-3 mb-2" style={{ backgroundColor: 'rgba(200, 0, 0, 0.9)' }}> */}
+      <div className=" p-4 border rounded-3 mb-2">
         <h1>Page not found</h1>
       </div>
 
@@ -24,4 +25,4 @@ function ErrorBoundary(props) {
   );
     }
 
-export default ErrorBoundary;
+export default PageNotFound;
