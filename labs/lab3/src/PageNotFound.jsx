@@ -12,7 +12,8 @@ function PageNotFound(props) {
 
       <Navbar />
 
-      <div className=" p-4 border rounded-3 mb-2" style={{ backgroundColor: 'rgba(200, 0, 0, 0.9)' }}>
+      {/* <div className=" p-4 border rounded-3 mb-2" style={{ backgroundColor: 'rgba(200, 0, 0, 0.9)' }}> */}
+      <div className=" p-4 border rounded-3 mb-2">
         <h1>Page not found</h1>
       </div>
 

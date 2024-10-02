@@ -7,7 +7,7 @@ const OrderConfirmation = () => {
   const { uuid } = useParams(); 
   const item = cart.find((item) => item.uuid === uuid); 
   return (
-      <div className=" p-4 border rounded-3 mb-2" style={{ backgroundColor: 'rgba(20, 140, 50, 0.3)' }}>
+      <div className="alert alert-success">
         <div key={item.uuid}>
           En sallad har lagts till i varukorgen. {item.getIngredients()}, pris: {item.getPrice()}kr
         </div>
