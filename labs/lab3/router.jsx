@@ -8,8 +8,8 @@ import OrderConfirmation from "./src/OrderConfirmation";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-    errorElement: <PageNotFound />,
+    Component: App,
+    errorElement: <PageNotFound/>,
     children: [
       {
         path: "compose-salad",
