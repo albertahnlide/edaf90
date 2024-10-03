@@ -81,9 +81,10 @@ function App(props) {
     .then(response => response.json())
     .then((data) => {
       setOrderData(data); 
+      setCart([]);
+      window.localStorage.setItem('cart', "");
       navigate('/view-order');
       setToastVisible(true);
-      setCart([]);
     });
   }
 
