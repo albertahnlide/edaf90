@@ -10,6 +10,7 @@ const router = createBrowserRouter([
     path: "/",
     Component: App,
     errorElement: <PageNotFound/>,
+    loader: inventoryLoader,
     children: [
       {
         path: "compose-salad",
@@ -78,11 +79,11 @@ async function inventoryLoader() {
   function safeFetchJson(url) {
     return fetch(url)
     .then(response => {
-    if(!response.ok) {
-    throw new Error(`${url} returned status ${response.status}`);
-    }
-    return response.json();
+      if(!response.ok) {
+        throw new Error(`${url} returned status ${response.status}`);
+      }
+      return response.json();
     });
-    }
+  }
 
 export default router;

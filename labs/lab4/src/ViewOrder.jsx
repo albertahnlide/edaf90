@@ -4,7 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 function ViewOrder() {
-  const { cart = [] } = useOutletContext(); // Default to an empty array if cart is undefined
+  const { cart = [], placeOrder } = useOutletContext();
 
   return (
     <div>
@@ -19,10 +19,13 @@ function ViewOrder() {
               </div>
             ))}
           </fieldset>
+          <button className="btn btn-primary mt-4" onClick={placeOrder}>Order</button>
         </div>
       </div>
     </div>
   );
 }
+
+
 
 export default ViewOrder;

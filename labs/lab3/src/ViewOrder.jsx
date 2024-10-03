@@ -4,7 +4,7 @@ import { useOutletContext } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 function ViewOrder() {
-  const { cart = [] } = useOutletContext(); // Default to an empty array if cart is undefined
+  const { cart = [] } = useOutletContext();
 
   return (
     <div>
