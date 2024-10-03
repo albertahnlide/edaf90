@@ -12,24 +12,23 @@ const OrderConfirmation = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if(!item) {
-      navigate("/view-order");
-    }
-  }, [item, navigate]);
+  if(!item) { 
+    navigate("/view-order");
+    return <></>;
+  }
 
   return (
-    item ? (
       <div className="alert alert-success">
         <div key="confirmation">
           En sallad har lagts till i varukorgen. {item.getIngredients()}, pris: {item.getPrice()}kr
         </div>
       </div>
-    ) : null
   );
 };
 
 export default OrderConfirmation;
+
+
 
 
 

@@ -7,7 +7,6 @@ import OrderConfirmation from "./src/OrderConfirmation";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     Component: App,
     errorElement: <PageNotFound/>,
     children: [

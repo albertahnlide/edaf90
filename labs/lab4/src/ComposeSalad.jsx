@@ -162,8 +162,8 @@ function ComposeSalad(props) {
           <div className="row row-cols-4" id="extra">  
             {(() => {
               const checkboxes = makeCheckboxes(inventory, 'extra');
-              return checkboxes.map((checkbox) => (
-                <div className="col" key={checkbox.name} required>
+              return checkboxes.map((checkbox, index) => (
+                <div className="col" key={index} required>
                   {checkbox}
                 </div>
               ));
