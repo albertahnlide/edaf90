@@ -6,7 +6,7 @@ import Navbar from './Navbar';
 import { useNavigation } from 'react-router-dom';
 import Spinner from './Spinner';
 import { useNavigate } from 'react-router-dom'; 
-import Salad from './Salad';
+import Salad4 from './Salad4.mjs'
 import { useLoaderData } from 'react-router-dom';
 
 
@@ -18,14 +18,14 @@ function App(props) {
   const navigate = useNavigate();
   const inventory = useLoaderData();
   // let extras = Object.keys(inventory).filter(name => inventory[name].extra);
-  Salad.parse = function(json) {
+  Salad4.parse = function(json) {
 
     const arr = JSON.parse(json);
   
     if (Array.isArray(arr)) {
       const salads = [];
       arr.forEach(salad => {
-        const newSalad = new Salad();
+        const newSalad = new Salad4();
         salad.ingredients.forEach(ingredient => {
           newSalad.add(ingredient.name, inventory[ingredient.name]);
         });
@@ -34,7 +34,7 @@ function App(props) {
       return salads;
     }
     else {
-      const newSalad = new Salad();
+      const newSalad = new Salad4();
       arr.ingredients.forEach(ingredient => {
         newSalad.add(ingredient.name, inventory[ingredient.name]);
       });
@@ -49,7 +49,7 @@ function App(props) {
   function initFunction() {
     const jsonCart = window.localStorage.getItem('cart');
     if (jsonCart) {
-      return Salad.parse(jsonCart);
+      return Salad4.parse(jsonCart);
     }
     else {
       return [];

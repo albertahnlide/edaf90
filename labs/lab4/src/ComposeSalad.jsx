@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import inventory from './inventory.mjs';
-import Salad from './Salad';
+import Salad4 from './Salad4';
 import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; 
 import { useLoaderData } from 'react-router-dom';
@@ -102,7 +102,7 @@ function ComposeSalad(props) {
         // }
 
 
-        const newSalad = new Salad()
+        const newSalad = new Salad4()
         .add(foundation, inventory[foundation])
         .add(protein, inventory[protein]);
         Object.keys(extras).forEach(name => {
