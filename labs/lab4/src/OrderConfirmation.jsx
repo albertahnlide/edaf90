@@ -21,7 +21,7 @@ const OrderConfirmation = () => {
   return (
     item ? (
       <div className="alert alert-success">
-        <div key={item.uuid}>
+        <div key="confirmation">
           En sallad har lagts till i varukorgen. {item.getIngredients()}, pris: {item.getPrice()}kr
         </div>
       </div>
