@@ -78,7 +78,12 @@ function App(props) {
       },
       body: json
     })
-    .then(response => response.json())
+    .then(response => {
+      if(!response.ok) {
+        throw new Error(`${url} returned status ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
       setOrderData(data); 
       setCart([]);
