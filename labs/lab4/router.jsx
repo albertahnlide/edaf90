@@ -71,7 +71,7 @@ async function inventoryLoader() {
       inventory[name] = await fetchIngredient(type, name);
     });
   
-    // Wait for all the promises to resolve
+    
     await Promise.all(promises);
   }
 

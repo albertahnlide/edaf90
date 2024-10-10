@@ -82,6 +82,7 @@ function App(props) {
     .then((data) => {
       setOrderData(data); 
       setCart([]);
+      //window.localStorage.setitem('cart','');
       window.localStorage.removeItem('cart');
       navigate('/view-order');
       setToastVisible(true);
@@ -109,7 +110,7 @@ function App(props) {
     <div className="container col-12">
       <Header />
       <Navbar />
-      {navigation.state === "loading" ? <Spinner /> : <Outlet context={{ addToCart, cart, placeOrder }} />}
+      {navigation.state === "loading" ? (<div className='mt-2'> <Spinner /> </div>) : <Outlet context={{ addToCart, cart, placeOrder }} />}
       <Footer />
 
 
