@@ -101,12 +101,12 @@ console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör
 console.log('\n--- reflection question 3 ---------------------------------------')
 console.log('typeof Salad: ' + typeof Salad);
 console.log('typeof Salad.prototype: ' + typeof Salad.prototype);
-// console.log('typeof Object.getPrototypeOf(Salad): ' + typeof Object.getPrototypeOf(Salad));
+console.log('typeof Object.getPrototypeOf(Salad): ' + typeof Object.getPrototypeOf(Salad));
 console.log('typeof Salad.prototype.prototype: ' + typeof Salad.prototype.prototype);
 console.log('typeof myCaesarSalad: ' + typeof myCaesarSalad);
 console.log('typeof myCaesarSalad.prototype: ' + typeof myCaesarSalad.prototype);
-// console.log('Object.getPrototypeOf(Salad): '+Object.getPrototypeOf(Salad));
-// console.log('Salad.prototype: '+ Salad.prototype)
+console.log('Object.getPrototypeOf(Salad): '+Object.getPrototypeOf(Salad));
+console.log('Salad.prototype: '+ Salad.prototype)
 console.log('check 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad)));
 console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSalad)));
 console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype)));
